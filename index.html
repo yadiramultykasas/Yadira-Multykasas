@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Multykasas Inmobiliaria venta compra y traspasos</title>
+
+    <meta name="description"
+        content="Asesoría profesional en bienes raíces. Compra, vende e invierte en propiedades de alto valor.">
+    <link rel="canonical" href="https://yadiramultykasas.github.io/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yadiramultykasas.github.io/">
+    <meta property="og:title" content="Multykasas | Tu decides donde vivir">
+    <meta property="og:description" content="Asesoría profesional en bienes raíces. Propiedades de alto valor.">
+    <meta property="og:image" content="https://yadiramultykasas.github.io/assets/images/og-image.webp">
+    <link rel="icon" href="assets/images/favicon.icon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-46KCJW753M"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-46KCJW753M');
+    </script>
+</head>
+
+<body>
+    <!-- Video de fondo -->
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="assets/videos/MULTYKASAS VIDEO.mp4" type="video/mp4">
+    </video>
+
+    <main class="main-container">
+        <article class="profile-card">
+
+            <div class="profile-header">
+                <img src="ASSETS/IMAGES/LOGO MULTYKASAS.png" alt="Logotipo Lumark Realty Group" class="profile-logo"
+                    fetchpriority="high" decoding="async">
+            </div>
+
+            <div class="profile-body">
+                <h1 class="profile-title">Multykasas</h1>
+                <p class="profile-description">
+                    Tu decides donde vivir.
+                </p>
+            </div>
+
+            <div class="profile-cta">
+                <a href="Catalogo Multykasas.html" class="cta-button" target="_blank" rel="noopener noreferrer">
+                    VER CATÁLOGO DE PROPIEDADES
+                </a>
+            </div>
+
+            <nav class="social-bar">
+                <a href="https://www.facebook.com/vanessa.dukes.942?mibextid=wwXIfr&rdid=sWLeu2SVvAaDB5cF&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1KD5QNRH4F%2F%3Fmibextid%3DwwXIfr#"
+                    class="social-link facebook" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://wa.me/+5216643085106" class="social-link whatsapp" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </nav>
+        </article>
+    </main>
+
+    <script>
+        const GITHUB_USER = "yadiramultykasas"; // CAMBIA ESTO
+
+        async function trackClick(platform) {
+            // 1. Registro en Google Analytics 4 (Métrica con Fechas)
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_social', {
+                    'plataforma': platform
+                });
+            }
+
+            try {
+                // 2. Registro en CounterAPI (Odómetro Total)
+                await fetch(`https://api.counterapi.dev/v1/${GITHUB_USER}/${platform}/up`, {
+                    keepalive: true,
+                    mode: 'no-cors'
+                });
+            } catch (error) {
+                // Falla silenciosa: si hay AdBlock, la página sigue funcionando perfecto
+            }
+        }
+
+        // Debounce para evitar clics accidentales múltiples
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        document.querySelectorAll('.social-link, .cta-button').forEach(el => {
+            el.addEventListener('click', debounce((e) => {
+                // Usamos 'el' en lugar de 'e.currentTarget' porque el evento expira tras el timeout
+                const platform = el.classList.contains('cta-button')
+                    ? 'catalogo'
+                    : el.className.split(' ')[1];
+
+                trackClick(platform);
+            }, 300));
+        });
+    </script>
+</body>
+
+</html>
